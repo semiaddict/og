@@ -25,7 +25,16 @@ process:
       plugin: skip_on_empty
       method: row
       message: 'User uid is missing'
-  entity_id: gid
+  # Currently only supports node entities
+  entity_id:
+    -
+      plugin: migration_lookup
+      migration: d7_node
+      source: gid
+    -
+      plugin: skip_on_empty
+      method: row
+      message: 'Membership group is missing'
   entity_type:
     -
       plugin: og_entity_type_exists

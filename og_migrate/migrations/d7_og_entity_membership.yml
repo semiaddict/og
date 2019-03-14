@@ -5,8 +5,26 @@ migration_tags:
 source:
   plugin: d7_og_membership
 process:
-  target_id: gid
-  entity_id: etid
+  # Currently only supports node groups
+  target_id:
+    -
+      plugin: migration_lookup
+      migration: d7_node
+      source: gid
+    -
+      plugin: skip_on_empty
+      method: row
+      message: 'Membership group is missing'
+  # Currently only supports node entities
+  entity_id:
+    -
+      plugin: migration_lookup
+      migration: d7_node
+      source: etid
+    -
+      plugin: skip_on_empty
+      method: row
+      message: 'Membership entity is missing'
   entity_type:
     -
       plugin: og_entity_type_exists
@@ -32,9 +50,9 @@ destination:
 migration_dependencies:
   required:
     - d7_user
+    - d7_node
     - d7_og_role
     - d7_og_group
     - d7_og_field_instance
   optional:
-    - d7_node
     - d7_taxonomy_term
