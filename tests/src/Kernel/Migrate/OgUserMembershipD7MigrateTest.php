@@ -79,7 +79,8 @@ class OgUserMembershipD7MigrateTest extends MigrateDrupal7TestBase {
       'd7_field_instance',
       'd7_og_field_instance',
       'd7_og_membership_type',
-      'd7_og_entity_membership',
+      'd7_og_entity_membership:node_user',
+      'd7_og_entity_membership:taxonomy_term_user',
     ]);
   }
 
@@ -102,9 +103,9 @@ class OgUserMembershipD7MigrateTest extends MigrateDrupal7TestBase {
     // Gets user 2, entity ID 1 membership.
     $membership = array_reduce($memberships, function (&$result, OgMembershipInterface $membership) {
       if ($result === NULL && $membership->uid->target_id == 2 &&
-          $membership->entity_id->value == 1 &&
-          $membership->entity_type->value === 'node' &&
-          $membership->entity_bundle->value === 'test_content_type') {
+          $membership->getGroupId() == 1 &&
+          $membership->getGroupEntityType() === 'node' &&
+          $membership->getGroupBundle() === 'test_content_type') {
         $result = $membership;
       }
       return $result;

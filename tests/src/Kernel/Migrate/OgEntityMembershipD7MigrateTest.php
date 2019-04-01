@@ -61,9 +61,6 @@ class OgEntityMembershipD7MigrateTest extends MigrateDrupal7TestBase {
       'd7_node_type',
       'd7_node:test_content_type',
       'd7_node:article',
-      'd7_node:book',
-      'd7_node:blog',
-      'd7_node:page',
       'd7_node:forum',
       'd7_comment_type',
       'd7_comment_field',
@@ -79,7 +76,8 @@ class OgEntityMembershipD7MigrateTest extends MigrateDrupal7TestBase {
       'd7_field_instance',
       'd7_og_field_instance',
       'd7_og_membership_type',
-      'd7_og_entity_membership',
+      'd7_og_entity_membership:node_node',
+      'd7_og_entity_membership:taxonomy_term_node',
     ]);
   }
 
